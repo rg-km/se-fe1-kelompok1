@@ -1,9 +1,13 @@
 const CELL_SIZE = 20;
 // Soal no 1: Set canvas size menjadi 600
-const CANVAS_SIZE = 600;
+const CANVAS_SIZE = 500;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
+//music
+const musicSound = new Audio("assets/audio/music.mp3");
+musicSound.loop = true;
+musicSound.play();
 //this
 const DIRECTION = {
   LEFT: 0,
@@ -11,7 +15,9 @@ const DIRECTION = {
   UP: 2,
   DOWN: 3,
 };
-// Soal no 2: Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
+
+//Speed
+//Soal no 2: Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
 const MOVE_INTERVAL = 120;
 
 function initPosition() {
@@ -31,19 +37,7 @@ let snake1 = {
   direction: initDirection(),
   score: 0,
 };
-let snake2 = {
-  color: "blue",
-  position: initPosition(),
-  direction: initDirection(),
-  score: 0,
-};
-// Soal no 6: add snake3
-let snake3 = {
-  color: "black",
-  position: initPosition(),
-  direction: initDirection(),
-  score: 0,
-};
+
 let apple1 = {
   color: "red",
   position: initPosition(),
@@ -64,10 +58,6 @@ function drawScore(snake) {
   let scoreCanvas;
   if (snake.color == snake1.color) {
     scoreCanvas = document.getElementById("score1Board");
-  } else if (snake.color == snake2.color) {
-    scoreCanvas = document.getElementById("score2Board");
-  } else {
-    scoreCanvas = document.getElementById("score3Board");
   }
   let scoreCtx = scoreCanvas.getContext("2d");
 
@@ -85,9 +75,6 @@ function draw() {
     ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
     drawCell(ctx, snake1.position.x, snake1.position.y, snake1.color);
-    drawCell(ctx, snake2.position.x, snake2.position.y, snake2.color);
-    // Soal no 6: Draw Player 3
-    drawCell(ctx, snake3.position.x, snake3.position.y, snake3.color);
 
     // Soal no 4: draw more apples
     let img = document.getElementById("apple");
@@ -108,9 +95,6 @@ function draw() {
     );
 
     drawScore(snake1);
-    drawScore(snake2);
-    // Soal no 6: Draw Player 3 Score:
-    drawScore(snake3);
   }, REDRAW_INTERVAL);
 }
 
@@ -201,30 +185,6 @@ document.addEventListener("keydown", function (event) {
   } else if (event.key === "ArrowDown") {
     snake1.direction = DIRECTION.DOWN;
   }
-
-  if (event.key === "a") {
-    snake2.direction = DIRECTION.LEFT;
-  } else if (event.key === "d") {
-    snake2.direction = DIRECTION.RIGHT;
-  } else if (event.key === "w") {
-    snake2.direction = DIRECTION.UP;
-  } else if (event.key === "s") {
-    snake2.direction = DIRECTION.DOWN;
-  }
-
-  // Soal no 6: Add navigation snake3:
-  if (event.key === "j") {
-    snake3.direction = DIRECTION.LEFT;
-  } else if (event.key === "l") {
-    snake3.direction = DIRECTION.RIGHT;
-  } else if (event.key === "i") {
-    snake3.direction = DIRECTION.UP;
-  } else if (event.key === "k") {
-    snake3.direction = DIRECTION.DOWN;
-  }
 });
 
 move(snake1);
-move(snake2);
-// Soal no 6: Add more snake
-move(snake3);
