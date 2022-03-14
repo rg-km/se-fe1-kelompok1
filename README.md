@@ -8,3 +8,5 @@ Snake game developed using JavaScript HTML5 and CSS. This game is made for the f
 - Riski Adi Pratama([riskiadi16](https://github.com/riskiadi16)) - FE2079272
 - Muhammad Faqihuddin ([jagoanemak22](https://github.com/Jagoanemak22)) - FE2118267
 
+## Play
+https://tarippu.github.io/snake-game.github.io/
